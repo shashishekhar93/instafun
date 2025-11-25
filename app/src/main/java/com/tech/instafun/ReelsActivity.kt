@@ -11,7 +11,7 @@ import com.tech.instafun.presentation.reels.ReelsScreen
 import com.tech.instafun.ui.theme.ReelsAppTheme
 
 
-class MainActivity : ComponentActivity() {
+class ReelsActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
