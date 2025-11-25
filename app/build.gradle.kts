@@ -40,6 +40,7 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+
     buildFeatures {
         compose = true
         //buildConfig = true
@@ -55,17 +56,20 @@ dependencies {
     implementation(libs.ads.mobile.sdk)
     implementation(libs.androidx.constraintlayout)
 
-    implementation ("com.squareup.retrofit2:retrofit:3.0.0")
-    implementation ("com.squareup.retrofit2:converter-gson:3.0.0")
-    implementation ("com.google.code.gson:gson:2.13.2")
-    implementation ("com.squareup.okhttp3:okhttp:5.3.2")
-    implementation ("com.squareup.okhttp3:logging-interceptor:5.3.2")
+    implementation("com.squareup.retrofit2:retrofit:3.0.0")
+    implementation("com.squareup.retrofit2:converter-gson:3.0.0")
+    implementation("com.google.code.gson:gson:2.13.2")
+    implementation("com.squareup.okhttp3:okhttp:5.3.2")
+    implementation("com.squareup.okhttp3:logging-interceptor:5.3.2")
 
     implementation("androidx.hilt:hilt-navigation-compose:1.3.0")
 
     // ExoPlayer
-    implementation("androidx.media3:media3-exoplayer:1.8.0")
-    implementation(libs.androidx.media3.ui)
+    //caching
+    // implementation("androidx.media3:media3-exoplayer-cache:1.8.0")
+    implementation("androidx.media3:media3-exoplayer-dash:1.8.0")
+    //implementation("androidx.media3:media3-exoplayer-hls:1.8.0")
+
 // Accompanist Pager
     implementation("com.google.accompanist:accompanist-pager:0.36.0")
 
@@ -88,6 +92,8 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    // ExoPlayer
+    implementation(libs.androidx.media3.ui)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

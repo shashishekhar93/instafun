@@ -15,9 +15,13 @@ import androidx.media3.common.C
 import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
 import androidx.media3.common.util.UnstableApi
+import androidx.media3.datasource.DefaultDataSource
+import androidx.media3.datasource.cache.CacheDataSource
 import androidx.media3.exoplayer.ExoPlayer
+import androidx.media3.exoplayer.source.ProgressiveMediaSource
 import androidx.media3.ui.AspectRatioFrameLayout
 import androidx.media3.ui.PlayerView
+import com.tech.instafun.retrofit.CacheSingleton
 
 
 @OptIn(UnstableApi::class)
@@ -25,15 +29,29 @@ import androidx.media3.ui.PlayerView
 fun VideoPlayer(url: String) {
 
     val context = LocalContext.current
+    val cacheValue = remember { CacheSingleton.getCache(context) }
+
+    val cacheDataSourceFactory = remember {
+        CacheDataSource.Factory()
+            .setCache(cacheValue)
+            .setUpstreamDataSourceFactory(DefaultDataSource.Factory(context))
+            .setFlags(CacheDataSource.FLAG_IGNORE_CACHE_ON_ERROR)
+
+    }
 
     val exoPlayer = remember {
         ExoPlayer.Builder(context)
             .build()
             .also { exoPlayer ->
-                val mediaItem = MediaItem.Builder()
-                    .setUri(url)
-                    .build()
-                exoPlayer.setMediaItem(mediaItem)
+
+                val mediaItem = MediaItem.Builder().setUri(url).build()
+
+                val mediaSource = ProgressiveMediaSource.Factory(cacheDataSourceFactory)
+                    .createMediaSource(mediaItem)
+                exoPlayer.setMediaSource(mediaSource)
+
+                //exoPlayer.setMediaItem(mediaItem)
+
                 exoPlayer.playWhenReady = true
                 exoPlayer.repeatMode = Player.REPEAT_MODE_ALL
                 exoPlayer.videoScalingMode = C.VIDEO_SCALING_MODE_SCALE_TO_FIT_WITH_CROPPING
