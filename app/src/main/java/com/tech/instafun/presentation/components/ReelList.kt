@@ -15,6 +15,7 @@ import androidx.compose.material3.DividerDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -26,20 +27,23 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.tech.instafun.presentation.reels.VideoPlayer
-import com.tech.instafun.utils.DummyData
+import com.tech.instafun.presentation.viewmodel.ReelsViewModel
 
 @Preview
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun ReelsList() {
+fun ReelsList(viewModel: ReelsViewModel) {
     val context = LocalContext.current
-    val reels = remember { DummyData.reels }
+    //val reels = remember { DummyData.reels }
+    //val reels = remember { viewModel.reels }
+    val reels by viewModel.reels.observeAsState(emptyList())
     val size by remember { mutableStateOf(100.dp) }
     var isLike by remember { mutableStateOf(false) }
 
     val pager = rememberPagerState(
         initialPage = 0,
-        pageCount = { reels.size }
+        //pageCount = { reels.value?.size!! }
+        pageCount = {reels.size }
     )
 
     val animatedSize by animateDpAsState(
@@ -86,9 +90,12 @@ fun ReelsList() {
                             }
                         )
                     }) {
-                VideoPlayer(url = reels[index].video)
+                VideoPlayer(url = reels[index].videoFiles[0].link)
+               // reels.value?.get(index)?.videoFiles?.get(0)?.link?.let { VideoPlayer(url = it) }
+                //VideoPlayer(url = reels[index].video)
                 Column(Modifier.align(Alignment.BottomStart)) {
-                    ReelsFooter(reels[index])
+                    ReelsFooter(reels.get(index).user)
+                    //reels.value?.get(index)?.let { ReelsFooter(it.user) }
                     HorizontalDivider(Modifier, DividerDefaults.Thickness, DividerDefaults.color)
                 }
             }

@@ -9,10 +9,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.tech.instafun.model.Reel
+import com.tech.instafun.model.User
 
 @Preview
 @Composable
-fun ReelsFooter(reel: Reel) {
+//fun ReelsFooter(reel: Reel) {
+fun ReelsFooter(user: User) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -21,7 +23,7 @@ fun ReelsFooter(reel: Reel) {
     ) {
 
         FooterUserData(
-            reel = reel,
+            user = user,
             modifier = Modifier.weight(8f)
         )
 

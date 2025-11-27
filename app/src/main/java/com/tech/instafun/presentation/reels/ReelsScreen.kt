@@ -12,11 +12,14 @@ import androidx.compose.ui.unit.dp
 import com.tech.instafun.presentation.components.AppBottomNavigation
 import com.tech.instafun.presentation.components.AppTopBar
 import com.tech.instafun.presentation.components.ReelsList
+import com.tech.instafun.presentation.viewmodel.ReelsRepository
+import com.tech.instafun.presentation.viewmodel.ReelsViewModel
+import com.tech.instafun.retrofit.RetrofitApiService
 import com.tech.instafun.ui.theme.lightGreyColor
 
 @Preview
 @Composable
-fun ReelsScreen() {
+fun ReelsScreen(viewModel: ReelsViewModel) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = { AppTopBar(title = "Insta Fun") },
@@ -29,10 +32,9 @@ fun ReelsScreen() {
                     .padding(horizontal = 10.dp, vertical = 10.dp)
                     .clip(RoundedCornerShape(15.dp))
             ) {
-                ReelsList()
+                ReelsList(viewModel)
             }
         }
     }
-
 }
 

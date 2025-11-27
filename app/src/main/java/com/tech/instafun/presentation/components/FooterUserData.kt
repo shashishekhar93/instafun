@@ -23,10 +23,12 @@ import androidx.compose.ui.unit.dp
 import com.skydoves.landscapist.ImageOptions
 import com.skydoves.landscapist.glide.GlideImage
 import com.tech.instafun.model.Reel
+import com.tech.instafun.model.User
 
 @Preview
 @Composable
-fun FooterUserData(reel: Reel, modifier: Modifier) {
+//fun FooterUserData(reel: Reel, modifier: Modifier) {
+fun FooterUserData(user: User, modifier: Modifier) {
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.Center
@@ -35,7 +37,7 @@ fun FooterUserData(reel: Reel, modifier: Modifier) {
             verticalAlignment = Alignment.CenterVertically,
         ) {
             GlideImage(
-                imageModel = { reel.userImage },
+                imageModel = { user.url },
                 modifier = Modifier
                     .size(28.dp)
                     .background(color = Color.Gray, shape = CircleShape)
@@ -49,7 +51,7 @@ fun FooterUserData(reel: Reel, modifier: Modifier) {
             Spacer(modifier = Modifier.width(18.dp))
 
             Text(
-                text = reel.userName,
+                text = user.name,
                 color = Color.White,
                 style = MaterialTheme.typography.bodyMedium
             )
@@ -75,7 +77,7 @@ fun FooterUserData(reel: Reel, modifier: Modifier) {
         Spacer(modifier = Modifier.height(10.dp))
 
         Text(
-            text = reel.comment,
+            text = user.name,
             color = Color.White,
             style = MaterialTheme.typography.bodyMedium
         )
@@ -86,7 +88,7 @@ fun FooterUserData(reel: Reel, modifier: Modifier) {
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = reel.userName,
+                text = user.name,
                 color = Color.White,
                 style = MaterialTheme.typography.labelSmall
             )
