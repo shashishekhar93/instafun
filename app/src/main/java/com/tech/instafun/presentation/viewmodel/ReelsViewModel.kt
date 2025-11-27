@@ -38,6 +38,7 @@ class ReelsViewModel(private val reelsRepository: ReelsRepository) : ViewModel()
             } catch (e: Exception) {
                 _error.value = "Exception: ${e.localizedMessage}"
             }
+            _loading.value = false
         }
     }
 }

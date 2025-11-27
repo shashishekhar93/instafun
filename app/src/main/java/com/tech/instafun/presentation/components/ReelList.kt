@@ -35,7 +35,6 @@ import com.tech.instafun.presentation.viewmodel.ReelsViewModel
 fun ReelsList(viewModel: ReelsViewModel) {
     val context = LocalContext.current
     //val reels = remember { DummyData.reels }
-    //val reels = remember { viewModel.reels }
     val reels by viewModel.reels.observeAsState(emptyList())
     val size by remember { mutableStateOf(100.dp) }
     var isLike by remember { mutableStateOf(false) }
